@@ -48,6 +48,7 @@ public class ShoppingServlet extends HttpServlet {
 		boolean invalidateSession = false;
 		PrintWriter out = res.getWriter();
 		HttpSession session = req.getSession(true);
+//		session.setMaxInactiveInterval(30);
 		res.setLocale(new Locale("en_US"));
 		@SuppressWarnings("unchecked")
 		List<CartBean> cart = (List<CartBean>) session.getAttribute("shoppingcart");;

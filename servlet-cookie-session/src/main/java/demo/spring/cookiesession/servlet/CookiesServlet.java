@@ -33,14 +33,18 @@ public class CookiesServlet extends HttpServlet {
             throws ServletException, IOException {
         for (int i = 1; i <= 3; i++) {
             // default maxAge is -1, indicating that cookie lives till the end of current browser session
-            Cookie cookie = new Cookie("session-cookie-" + i,
-                    "session-cookie-value-" + i);
+            Cookie cookie = new Cookie("session-cookie-" + i,"session-cookie-value-" + i);
             resp.addCookie(cookie);
             // this cookie will be valid for an hour
             cookie = new Cookie("persistent-cookie-" + i,"persistent-cookie-value-" + i);
             cookie.setMaxAge(3600);
+            cookie.setPath("/cookies");
             resp.addCookie(cookie);
         }
+        Cookie langCookie = new Cookie("lang","bg_BG");
+        langCookie.setMaxAge(30);
+        langCookie.setHttpOnly(true);
+        resp.addCookie(langCookie);
         resp.setContentType("text/html");
         PrintWriter out = resp.getWriter();
         String docType =
@@ -57,9 +61,7 @@ public class CookiesServlet extends HttpServlet {
         if (cookies == null) {
             out.println("<tr><td colspan=2>No cookies sent");
         } else {
-            Cookie cookie;
-            for (int i = 0; i < cookies.length; i++) {
-                cookie = cookies[i];
+            for(Cookie cookie : cookies) {
                 out.println("<tr><td>" + cookie.getName() + "<td>" + cookie.getValue() + "</td></tr>\n");
             }
         }
