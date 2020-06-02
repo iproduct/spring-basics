@@ -16,12 +16,14 @@ package demo.spring.cookiesession;
 
 import org.apache.catalina.WebResourceRoot;
 import org.apache.catalina.core.StandardContext;
+import org.apache.catalina.session.StandardManager;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.catalina.webresources.DirResourceSet;
 import org.apache.catalina.webresources.StandardRoot;
 
 import java.io.File;
 import java.util.Locale;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 public class DemoApp {
@@ -36,7 +38,7 @@ public class DemoApp {
         tomcat.setPort(PORT);
         tomcat.getConnector(); // Trigger the creation of the default connector
 
-        StandardContext ctx = (StandardContext) tomcat.addWebapp("/", new File(webappDirLocation).getAbsolutePath());
+        StandardContext ctx = (StandardContext) tomcat.addWebapp("", new File(webappDirLocation).getAbsolutePath());
         System.out.println("Application base directory: " + new File("./" + webappDirLocation).getAbsolutePath());
 
         // Declare an location for your "WEB-INF/classes" dir
@@ -46,9 +48,17 @@ public class DemoApp {
         resources.addPreResources(new DirResourceSet(resources, "/WEB-INF/classes",
                 additionWebInfClasses.getAbsolutePath(), "/"));
         ctx.setResources(resources);
+        StandardManager manager = new StandardManager();
+        manager.setPathname("./temp/SESSIONS.ser");
+        ctx.setManager(manager);
+        if (ctx.getManager() instanceof StandardManager) {
+            logger.info("Session serialization path: " + ((StandardManager)ctx.getManager()).getPathname());
+        }
 
         tomcat.start();
         logger.info("Embedded Tomcat server started on port " + PORT);
-        tomcat.getServer().await();
+        System.out.println("Press <ENTER> to stop the server.");
+        System.in.read();
+        tomcat.stop();
     }
 }

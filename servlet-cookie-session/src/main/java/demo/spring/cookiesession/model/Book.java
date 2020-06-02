@@ -1,5 +1,6 @@
 package demo.spring.cookiesession.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -12,7 +13,7 @@ import lombok.NonNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Book {
+public class Book implements Serializable {
 	private long id;
 	@NonNull
 	private String title;

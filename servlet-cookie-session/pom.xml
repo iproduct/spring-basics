@@ -10,7 +10,7 @@
 
     <properties>
         <tomcat.version>9.0.35</tomcat.version>
-        <java.version>13</java.version>
+        <java.version>12</java.version>
     </properties>
     <dependencies>
         <dependency>
@@ -66,16 +66,26 @@
                     <assembleDirectory>target</assembleDirectory>
                     <programs>
                         <program>
-                            <mainClass>launch.Main</mainClass>
-                            <name>webapp</name>
+                            <mainClass>demo.spring.cookiesession.DemoApp</mainClass>
+                            <id>cookiesession</id>
                         </program>
                     </programs>
+                    <daemons>
+                        <daemon>
+                            <id>daemon-1</id>
+                            <mainClass>demo.spring.cookiesession.DemoApp</mainClass>
+                            <platforms>
+                                <platform>jsw</platform>
+                            </platforms>
+                        </daemon>
+                    </daemons>
                 </configuration>
                 <executions>
                     <execution>
                         <phase>package</phase>
                         <goals>
                             <goal>assemble</goal>
+                            <goal>generate-daemons</goal>
                         </goals>
                     </execution>
                 </executions>
