@@ -129,14 +129,16 @@ public class DataInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
         if(userService.getUsersCount() == 0) {
             SAMPLE_USERS.forEach(user -> userService.createUser(user));
+            log.info("Created Users: {}", userService.getUsers());
         }
-        log.info("Created Users: {}", userService.getUsers());
+
         if(brandService.getBrandsCount() == 0) {
             SAMPLE_BRANDS.forEach((brand, models) -> {
                 Brand newBrand = Brand.create(brand, models);
                 brandService.createBrand(newBrand);
             });
+            log.info("Created Brands: {}", brandService.getBrands());
         }
-        log.info("Created Brands: {}", brandService.getBrands());
+
     }
 }

@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <title>West Compass</title>
+    <title>Auto Dealer Shop</title>
     <link rel="stylesheet" href="/css/reset-css.css"/>
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/style.css"/>
 </head>
 <body>
-<main class="main">
+<main>
     <nav class="navbar navbar-expand-lg navbar-background">
         <a class="nav-link text-white active h5" href="/">Home</a>
         <a class="nav-link text-white active h5" href="/users/register">Register Seller</a>
         <div class="collapse navbar-collapse d-flex justify-content-end">
-             <ul class="navbar-nav row">
+            <ul class="navbar-nav row">
                 <li class="nav-item col-md-3">
                     <a class="nav-link text-white active font-weight-bold" href="/">Add Brand</a>
                 </li>
@@ -31,17 +30,21 @@
             </ul>
         </div>
     </nav>
-    <div class="container-fluid">
-        <h2 class="text-center text-white ">Auto Dealer Shop</h2>
+    <div class="container">
+        <h2 class="text-center text-white mt-5">Auto Dealer Shop Offers</h2>
         <hr style="width: 50%"/>
-        <h4 class="font-italic text-center text-white ">
-            By clicking the buttons below you can check our car deals or upload a
-            brand new.
-        </h4>
-        <br/>
-        <div class="text-center">
-            <a class="btn btn-secondary text-center mr-4" href="/">Upload Offer</a>
-            <a class="btn btn-secondary text-center ml-4" href="/">All Offers</a>
+        <div class='row mb-4 d-flex justify-content-around'>
+
+            <div th:each="brand, brandStat: ${brands}" class="col-md-4 d-flex flex-column bg-text mb-3">
+                <h2>Car brand:
+                    <span th:text="${brand.getName()}" />
+                </h2>
+                <h4>Model: ....</h4>
+               <h4>Year: ...</h4>
+               <h4>Engine: ...</h4>
+                <h4><a class="btn-block" href="/cars/id">Details</a></h4>
+            </div>
+
         </div>
     </div>
 </main>
