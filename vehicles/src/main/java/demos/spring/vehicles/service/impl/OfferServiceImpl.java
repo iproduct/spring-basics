@@ -71,8 +71,11 @@ public class OfferServiceImpl implements OfferService {
     public Offer updateOffer(Offer offer) {
         offer.setModified(new Date());
         Offer old = getOfferById(offer.getId());
+        if(old == null) {
+            throw new EntityNotFoundException(String.format("Offer with ID=%s not found.", offer.getId()));
+        }
         if(offer.getSeller() != null && offer.getSeller().getId() != old.getSeller().getId())
-            throw new InvalidEntityException("Seller of article could not ne changed");
+            throw new InvalidEntityException("Seller of offer could not ne changed");
         offer.setSeller(old.getSeller());
         return offerRepo.save(offer);
     }

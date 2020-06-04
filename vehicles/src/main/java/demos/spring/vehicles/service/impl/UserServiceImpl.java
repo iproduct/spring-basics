@@ -4,6 +4,7 @@ package demos.spring.vehicles.service.impl;
 import demos.spring.vehicles.dao.UserRepository;
 import demos.spring.vehicles.events.UserCreationEvent;
 import demos.spring.vehicles.exception.InvalidEntityException;
+import demos.spring.vehicles.model.Offer;
 import demos.spring.vehicles.model.Role;
 import demos.spring.vehicles.model.User;
 import demos.spring.vehicles.service.UserService;
@@ -50,6 +51,10 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User updateUser(User user) {
+        User old = getUserById(user.getId());
+        if(user.getUsername() != null && !user.getUsername().equals(old.getUsername())) {
+            throw new InvalidEntityException("Username of a user could not ne changed.");
+        }
         user.setModified(new Date());
         return userRepo.save(user);
     }

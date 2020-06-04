@@ -27,8 +27,8 @@ public class BrandServiceImpl implements BrandService {
     @Autowired
     private UserRepository userRepo;
 
-    @Autowired
-    private ApplicationEventPublisher applicationEventPublisher;
+//    @Autowired
+//    private ApplicationEventPublisher applicationEventPublisher;
 
     @Override
     public Collection<Brand> getBrands() {
@@ -55,6 +55,9 @@ public class BrandServiceImpl implements BrandService {
     public Brand updateBrand(Brand brand) {
         brand.setModified(new Date());
         Brand old = getBrandById(brand.getId());
+        if(old == null) {
+            throw new EntityNotFoundException(String.format("Brand with ID=%s not found.", brand.getId()));
+        }
         return brandRepo.save(brand);
     }
 
