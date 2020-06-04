@@ -34,31 +34,13 @@
         <h2 class="text-center text-white mt-5">Auto Dealer Shop Offers</h2>
         <hr style="width: 50%"/>
         <div class='row mb-4 d-flex justify-content-around'>
-
-            <div th:each="brand, brandStat: ${brands}" class="brand-section col-md-6 d-flex flex-column mb-1">
-                <h2>Car brand:
-                    <span th:text="${brand.name}" />
-                </h2>
-                <div>Models:
-                    <table>
-                        <tr>
-                            <th>No</th>
-                            <th>Name</th>
-                            <th>Category</th>
-                            <th>Start Year</th>
-                            <th>End Year</th>
-                            <th>Picture</th>
-                        </tr>
-                        <tr th:each="model, modelStat: ${brand.models}">
-                            <th th:text="${modelStat.index}">No</th>
-                            <th th:text="${model.name}">Name</th>
-                            <th th:text="${model.category}">Category</th>
-                            <th th:text="${model.startYear}">Start Year</th>
-                            <th th:text="${model.endYear}">End Year</th>
-                            <th><img th:src="${model.imageUrl}" class="img-thumbnail rounded"></th>
-                        </tr>
-                    </table>
-                </div>
+ 
+            <div th:each="offer, offerStat: ${offers}" class="col-md-4 d-flex flex-column bg-text mb-3">
+                <h2>Car brand: <span th:text="${offer.model.brand.name}" /></h2>
+                <h4>Model: <span th:text="${offer.model.name}" /></h4>
+                <h4>Year: <span th:text="${offer.year}" /></h4>
+                <h4>Engine: <span th:text="${offer.engine}" /></h4>
+                <h4><a class="btn-block" href="/cars/id">Details</a></h4>
             </div>
 
         </div>

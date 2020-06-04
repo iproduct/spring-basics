@@ -19,3 +19,11 @@ body {
      text-align: center;
 }
 
+.brand-section {
+     background: #ececf6;
+}
+
+td, th {
+     padding: 3px 8px;
+}
+

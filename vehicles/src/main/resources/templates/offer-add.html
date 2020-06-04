@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Auto Dealer Shop</title>
+    <link rel="stylesheet" href="/css/reset-css.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+<main class="main">
+    <nav class="navbar navbar-expand-lg navbar-background">
+        <a class="nav-link text-white active h5" href="/">Home</a>
+        <a class="nav-link text-white active h5" href="/users/register">Register Seller</a>
+        <div class="collapse navbar-collapse d-flex justify-content-end">
+            <ul class="navbar-nav row">
+                <li class="nav-item col-md-3">
+                    <a class="nav-link text-white active font-weight-bold" href="/">Add Brand</a>
+                </li>
+                <li class="nav-item col-md-3">
+                    <a class="nav-link text-white active font-weight-bold" href="/">Add Model</a>
+                </li>
+                <li class="nav-item col-md-3">
+                    <a class="nav-link text-white active font-weight-bold" href="/offers/add">Add Offer</a>
+                </li>
+                <li class="nav-item col-md-3">
+                    <a class="nav-link text-white active font-weight-bold" href="/offers">All Offers</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <h2 class="text-center text-white">Upload Offer</h2>
+        <form th:object="${offer}" class="mx-auto w-15" method="POST">
+            <div class="col col-md-3">
+                <div class="form-group ">
+                    <label for="year" class="text-center text-white font-weight-bold">Select Year</label>
+                    <input type="number" class="form-control" placeholder="Year" id="year" name="year" th:value="*{year}" />
+                </div>
+            </div>
+            <div class="col col-md-3">
+                <div class="form-group ">
+                    <label for="price" class="text-center text-white font-weight-bold">Select Price</label>
+                    <input type="number" class="form-control" placeholder="Year" id="price" name="price" th:value="*{price}" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-md-3">
+                    <div class="form-group">
+                        <label class="text-white font-weight-bold" for="description">Description
+                            <textarea th:value="*{description}" type="textarea" class="form-control" name="description"
+                                      id="description" rows="3" cols="80"
+                                      placeholder="Description"></textarea>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-md-4"></div>
+                <div class="col col-md-4">
+                    <div class="button-holder d-flex">
+                        <input type="submit" class="btn btn-secondary" value="Upload Car"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>

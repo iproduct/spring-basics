@@ -56,7 +56,7 @@ public class DataInitializer implements CommandLineRunner {
                 new Model("G11", CAR, 2015, null, "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/2017_BMW_750i_%28G12%29_front_3.23.18.jpg/560px-2017_BMW_750i_%28G12%29_front_3.23.18.jpg"),
                 new Model("G30", CAR, 2016, null, "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/2018_BMW_520d_M_Sport_Automatic_2.0_%281%29.jpg/560px-2018_BMW_520d_M_Sport_Automatic_2.0_%281%29.jpg"),
                 new Model("G32", CAR, 2017, null, "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/2018_BMW_630d_GT_M_Sport_Automatic_3.0_Front.jpg/560px-2018_BMW_630d_GT_M_Sport_Automatic_3.0_Front.jpg"),
-                new Model("Z1", CAR, 19989,1991, "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/BMWZ1.jpg/560px-BMWZ1.jpg"),
+                new Model("Z1", CAR, 1989,1991, "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/BMWZ1.jpg/560px-BMWZ1.jpg"),
                 new Model("Z3", CAR, 1995, 2002, "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/2001_BMW_Z3_Roadster_Automatic_2.2_Front.jpg/560px-2001_BMW_Z3_Roadster_Automatic_2.2_Front.jpg"),
                 new Model("Z4", CAR, 1995, null, "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/2019_BMW_Z4_M40i_Automatic_3.0.jpg/560px-2019_BMW_Z4_M40i_Automatic_3.0.jpg"),
                 new Model("Z5", CAR, 1989, 2016, "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/BMW_Z4%2C_Paris_Motor_Show_2018%2C_Paris_%281Y7A1387%29.jpg/560px-BMW_Z4%2C_Paris_Motor_Show_2018%2C_Paris_%281Y7A1387%29.jpg"),

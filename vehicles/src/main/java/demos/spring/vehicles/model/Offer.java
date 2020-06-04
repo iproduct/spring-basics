@@ -24,26 +24,26 @@ public class Offer {
     @EqualsAndHashCode.Include
     private Long id;
 
-    @NonNull
+//    @NonNull
     private VehicleCategory category;
 
-    @NonNull
+//    @NonNull
     @ManyToOne
     private Model model;
 
-    @NonNull
-    @PastOrPresent
+//    @NonNull
+//    @PastOrPresent
     @Min(1900)
     private Integer year;
 
-    @NonNull
+//    @NonNull
     @Positive
     private Integer mileage;
 
-    @NonNull
+//    @NonNull
     private EngineType engine;
 
-    @NonNull
+//    @NonNull
     private TransmissionType transmission;
 
     @NonNull
@@ -51,11 +51,10 @@ public class Offer {
     private String description;
 
     @NonNull
-    @PastOrPresent
     @Positive
     private Double price;
 
-    @NonNull
+//    @NonNull
     @Length(min = 8, max = 512)
     private String imageUrl;
 
