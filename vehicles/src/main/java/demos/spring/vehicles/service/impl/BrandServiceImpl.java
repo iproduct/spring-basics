@@ -63,8 +63,7 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public Brand deleteBrand(Long id) {
-        Brand old = brandRepo.findById(id).orElseThrow(() ->
-                new EntityNotFoundException(String.format("Brand with ID=%s not found.", id)));
+        Brand old = getBrandById(id);
         brandRepo.deleteById(id);
         return old;
     }
