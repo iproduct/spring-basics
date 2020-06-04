@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8"/>
+    <title>Auto Dealer Shop</title>
+    <link rel="stylesheet" href="/css/reset-css.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+<main>
+    <nav class="navbar navbar-expand-lg navbar-background">
+        <a class="nav-link text-white active h5" href="/">Home</a>
+        <a class="nav-link text-white active h5" href="/users/register">Register Seller</a>
+        <div class="collapse navbar-collapse d-flex justify-content-end">
+            <ul class="navbar-nav row">
+                <li class="nav-item col-md-3">
+                    <a class="nav-link text-white active font-weight-bold" href="/">Add Brand</a>
+                </li>
+                <li class="nav-item col-md-3">
+                    <a class="nav-link text-white active font-weight-bold" href="/">Add Model</a>
+                </li>
+                <li class="nav-item col-md-3">
+                    <a class="nav-link text-white active font-weight-bold" href="/">Add Offer</a>
+                </li>
+                <li class="nav-item col-md-3">
+                    <a class="nav-link text-white active font-weight-bold" href="/">All Offers</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2 class="text-center text-white mt-5">Car Details</h2>
+        <hr style="width: 50%"/>
+        <div class='row mb-4 d-flex justify-content-around'>
+            <div class="col-md-4 d-flex flex-column bg-text mb-3" th:object="${offer}">
+                <img width="100%"
+                     th:src="*{imageUrl}">
+                <div class="row">
+                    <div class="col">
+                        <h2>Car Info:</h2>
+                        <h4>Car brand</h4>
+                        <h4>Car model</h4>
+                        <h4>Car year</h4>
+                        <h4>Engine</h4>
+                        <h4>Transmission</h4>
+                    </div>
+                    <div class="col">
+                        <h2>Offer Info:</h2>
+                        <h4>Seller username</h4>
+                        <h4>Price</h4>
+                        <h4>Modified</h4>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                        <label for="description">Description</label>
+                        <br>
+                        <textarea class="bg-dark text-white" name="description" id="description"
+                                  disabled >Offer description</textarea>
+
+                </div>
+
+                <h4><a class="btn-outline-danger" href="/cars/delete/id">Delete</a></h4>
+            </div>
+
+
+        </div>
+    </div>
+</main>
+</body>
+</html>
