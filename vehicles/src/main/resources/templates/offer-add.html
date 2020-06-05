@@ -60,7 +60,7 @@
         <form th:object="${offer}" method="POST" class="mx-auto col-md-6 d-flex flex-column justify-content-center">
             <div class="form-group ">
                 <label class="text-center text-white font-weight-bold" for="model">Model</label>
-                <select th:field="*{modelId}" id="model" name="model" class="form-control">
+                <select th:field="*{modelId}" class="form-control">
                     <option value="-1">- Select a model -</option>
                     <optgroup th:each="brand : ${brands}" th:label="|-- ${brand.name} --|">
                         <option th:each="brand_model : ${brand.models}" th:value="${brand_model.id}"
@@ -73,7 +73,7 @@
             </div>
             <div class="form-group ">
                 <label class="text-center text-white font-weight-bold" for="model">Model</label>
-                <select th:field="*{engine}" id="engine" name="engine" class="form-control">
+                <select th:field="*{engine}" class="form-control">
                     <option value="">- Select engine type -</option>
                     <option th:each="eng_type : ${T(demos.spring.vehicles.model.EngineType).values()}" th:value="${eng_type}"
                             th:text="${eng_type}" th:selected="${offer.engine == eng_type}">
@@ -83,7 +83,7 @@
             </div>
             <div class="form-group ">
                 <label class="text-center text-white font-weight-bold" for="model">Model</label>
-                <select th:field="*{transmission}" id="transmission" name="transmission" class="form-control">
+                <select th:field="*{transmission}" class="form-control">
                     <option value="">- Select transmission type -</option>
                     <option th:each="trans_type : ${T(demos.spring.vehicles.model.TransmissionType).values()}" th:value="${trans_type}"
                             th:text="${trans_type}" th:selected="${offer.transmission == trans_type}">
@@ -93,18 +93,16 @@
             </div>
             <div class="form-group">
                 <label for="year" class="text-white font-weight-bold">Year</label>
-                <input type="number" min="1900" max="2099" step="1" class="form-control"
-                       placeholder="Manufacturing year" id="year" name="year" th:value="*{year}"/>
+                <input th:field="*{year}" type="number" min="1900" max="2099" step="1" class="form-control"
+                       placeholder="Manufacturing year" />
             </div>
             <div class="form-group">
                 <label for="price" class="text-white font-weight-bold">Price</label>
-                <input type="number" min="0" step="100" class="form-control" placeholder="Suggested price" id="price"
-                       name="price" th:value="*{price}"/>
+                <input th:field="*{price}" type="number" min="0" step="100" class="form-control" placeholder="Suggested price" />
             </div>
             <div class="form-group">
                 <label class="text-white font-weight-bold" for="description">Description</label>
-                <textarea th:value="*{description}" type="textarea" class="form-control" name="description"
-                          id="description" rows="3" cols="80"
+                <textarea th:field="*{description}" type="textarea" class="form-control" rows="3" cols="80"
                           placeholder="Description"></textarea>
             </div>
             <div class="row">
