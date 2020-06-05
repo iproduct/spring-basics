@@ -4,10 +4,12 @@ import demos.spring.vehicles.dao.BrandRepository;
 import demos.spring.vehicles.dao.UserRepository;
 import demos.spring.vehicles.exception.EntityNotFoundException;
 import demos.spring.vehicles.model.Brand;
+import demos.spring.vehicles.model.Model;
 import demos.spring.vehicles.service.BrandService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,7 +34,7 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public Collection<Brand> getBrands() {
-        return brandRepo.findAll();
+        return brandRepo.findAll(Sort.by("name"));
     }
 
     @Override
@@ -43,7 +45,7 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public Brand createBrand(@Valid Brand brand) {
-        if(brand.getCreated() == null) {
+        if (brand.getCreated() == null) {
             brand.setCreated(new Date());
         }
         brand.setModified(brand.getCreated());
@@ -55,7 +57,7 @@ public class BrandServiceImpl implements BrandService {
     public Brand updateBrand(Brand brand) {
         brand.setModified(new Date());
         Brand old = getBrandById(brand.getId());
-        if(old == null) {
+        if (old == null) {
             throw new EntityNotFoundException(String.format("Brand with ID=%s not found.", brand.getId()));
         }
         return brandRepo.save(brand);
@@ -84,4 +86,10 @@ public class BrandServiceImpl implements BrandService {
         return created;
     }
 
- }
+    @Override
+    public Model getModelById(Long id) {
+        return brandRepo.findModelById(id).orElseThrow(() ->
+                new EntityNotFoundException(String.format("Model with ID=%s not found.", id)));
+    }
+
+}

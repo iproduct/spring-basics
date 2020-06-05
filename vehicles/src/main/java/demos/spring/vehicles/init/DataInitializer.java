@@ -68,7 +68,7 @@ public class DataInitializer implements CommandLineRunner {
             "Opel",
             Set.of(
                     new Model("Agila", CAR, 2000, 2007, "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Opel_Agila_A_1.2_Njoy.JPG/300px-Opel_Agila_A_1.2_Njoy.JPG"),
-                    new Model("Adam", CAR, 2013, 2019, "https://en.wikipedia.org/wiki/File:Opel_Adam_1.4_Slam_%E2%80%93_Frontansicht,_15._Januar_2014,_D%C3%BCsseldorf.jpg"),
+                    new Model("Adam", CAR, 2013, 2019, "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Opel_Adam_1.4_Slam_%E2%80%93_Frontansicht%2C_15._Januar_2014%2C_D%C3%BCsseldorf.jpg/1600px-Opel_Adam_1.4_Slam_%E2%80%93_Frontansicht%2C_15._Januar_2014%2C_D%C3%BCsseldorf.jpg"),
                     new Model("Karl", CAR,2015, 2019, "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Opel_KARL_%281%29.jpg/300px-Opel_KARL_%281%29.jpg"),
                     new Model("Chevette", CAR, 1980,1982, "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Vauxhall_Chevette_4_door_notchback_Trumpington.jpg/300px-Vauxhall_Chevette_4_door_notchback_Trumpington.jpg"),
                     new Model("Corsa A", CAR, 1982,1993,"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Opel_Corsa_A_front_20080131.jpg/300px-Opel_Corsa_A_front_20080131.jpg"),

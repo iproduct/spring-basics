@@ -1,10 +1,12 @@
 package demos.spring.vehicles.service.impl;
 
+import demos.spring.vehicles.dao.BrandRepository;
 import demos.spring.vehicles.dao.OfferRepository;
 import demos.spring.vehicles.dao.UserRepository;
 import demos.spring.vehicles.events.OfferCreationEvent;
 import demos.spring.vehicles.exception.EntityNotFoundException;
 import demos.spring.vehicles.exception.InvalidEntityException;
+import demos.spring.vehicles.model.Model;
 import demos.spring.vehicles.model.Offer;
 import demos.spring.vehicles.model.User;
 import demos.spring.vehicles.service.OfferService;
@@ -33,6 +35,9 @@ public class OfferServiceImpl implements OfferService {
     private UserRepository userRepo;
 
     @Autowired
+    private BrandRepository brandRepo;
+
+    @Autowired
     private ApplicationEventPublisher applicationEventPublisher;
 
     @Override
@@ -48,17 +53,30 @@ public class OfferServiceImpl implements OfferService {
 
     @Override
     public Offer createOffer(@Valid Offer offer) {
-        Long authorId;
+        Long sellerId;
         if(offer.getSeller() != null && offer.getSeller().getId() != null) {
-            authorId = offer.getSeller().getId();
+            sellerId = offer.getSeller().getId();
         } else {
-            authorId = offer.getSellerId();
+            sellerId = offer.getSellerId();
         }
-        if(authorId != null) {
-            User author = userRepo.findById(authorId)
-                    .orElseThrow(() -> new InvalidEntityException("Seller with ID=" + authorId + " does not exist."));
+        if(sellerId != null) {
+            User author = userRepo.findById(sellerId)
+                    .orElseThrow(() -> new InvalidEntityException("Seller with ID=" + sellerId + " does not exist."));
             offer.setSeller(author);
         }
+
+        Long modelId;
+        if(offer.getModel() != null && offer.getModel().getId() != null) {
+            modelId = offer.getModel().getId();
+        } else {
+            modelId = offer.getModelId();
+        }
+        if(modelId != null) {
+            Model model = brandRepo.findModelById(modelId)
+                    .orElseThrow(() -> new InvalidEntityException("Seller with ID=" + sellerId + " does not exist."));
+            offer.setModel(model);
+        }
+
         if(offer.getCreated() == null) {
             offer.setCreated(new Date());
         }

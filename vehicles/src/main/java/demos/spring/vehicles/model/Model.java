@@ -15,7 +15,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Model {
+public class Model implements Comparable<Model>{
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
@@ -57,4 +57,8 @@ public class Model {
         this.endYear = endYear;
     }
 
+    @Override
+    public int compareTo(Model o) {
+        return name.compareToIgnoreCase(o.getName());
+    }
 }

@@ -1,13 +1,11 @@
 package demos.spring.vehicles.model;
 
 import lombok.*;
+import org.hibernate.annotations.SortComparator;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -17,7 +15,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Brand {
+public class Brand implements Comparable<Brand>{
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @EqualsAndHashCode.Include
@@ -33,12 +31,18 @@ public class Brand {
     private Date created = new Date();
     private Date modified = new Date();
 
+    @Override
+    public int compareTo(Brand o) {
+        return name.compareToIgnoreCase(o.getName());
+    }
+
     public static Brand create(String name, Set<Model> models) {
         Brand brand = new Brand(name);
-        models.stream().forEach(model -> {
+        models.stream().sorted().forEach(model -> {
             model.setBrand(brand);
             brand.getModels().add(model);
         });
         return brand;
     }
+
 }

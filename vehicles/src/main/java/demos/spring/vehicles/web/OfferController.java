@@ -1,6 +1,7 @@
 package demos.spring.vehicles.web;
 
 import demos.spring.vehicles.model.Brand;
+import demos.spring.vehicles.model.EngineType;
 import demos.spring.vehicles.model.Offer;
 import demos.spring.vehicles.service.BrandService;
 import demos.spring.vehicles.service.OfferService;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/offers")
@@ -34,24 +38,28 @@ public class OfferController {
     }
 
     @GetMapping("/add")
-    public String getOfferForm(@ModelAttribute("offer") Offer offer) {
+    public String getOfferForm(Model model) {
+        model.addAttribute("offer", new Offer());
+        model.addAttribute("brands", brandService.getBrands());
+        model.addAttribute("engines", EngineType.values());
         return "offer-add";
     }
 
     @PostMapping("/add")
-    public String createNewOffer(@ModelAttribute("offer") Offer offer, Errors errors) {
+    public String createNewOffer(@Valid @ModelAttribute("offer") Offer offer, Errors errors) {
+        if(errors.hasErrors()) {
+            log.error("Error creating offer: {}", errors.getAllErrors());
+            return "offer-add";
+        }
         try {
-            Brand brand = brandService.getBrandById(1L);
-            offer.setModel(brand.getModels().get(0));
+//            Brand brand = brandService.getBrandById(1L);
+//            offer.setModel(brand.getModels().get(0));
             offerService.createOffer(offer);
         } catch(Exception ex) {
             log.error("Error creating offer", ex);
             return "offer-add";
         }
-        if(errors.hasErrors()) {
-            log.error("Error creating offer:", errors.getAllErrors());
-            return "offer-add";
-        }
+
         return "redirect:/offers";
     }
 
