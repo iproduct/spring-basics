@@ -41,12 +41,11 @@ public class OfferController {
     public String getOfferForm(Model model) {
         model.addAttribute("offer", new Offer());
         model.addAttribute("brands", brandService.getBrands());
-        model.addAttribute("engines", EngineType.values());
         return "offer-add";
     }
 
     @PostMapping("/add")
-    public String createNewOffer(@Valid @ModelAttribute("offer") Offer offer, Errors errors) {
+    public String createNewOffer(@ModelAttribute("offer") Offer offer, Errors errors) {
         if(errors.hasErrors()) {
             log.error("Error creating offer: {}", errors.getAllErrors());
             return "offer-add";

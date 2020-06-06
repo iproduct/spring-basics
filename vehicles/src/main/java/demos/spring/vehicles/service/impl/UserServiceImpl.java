@@ -2,7 +2,6 @@ package demos.spring.vehicles.service.impl;
 
 
 import demos.spring.vehicles.dao.UserRepository;
-import demos.spring.vehicles.events.UserCreationEvent;
 import demos.spring.vehicles.exception.InvalidEntityException;
 import demos.spring.vehicles.model.Offer;
 import demos.spring.vehicles.model.Role;
@@ -91,63 +90,6 @@ public class UserServiceImpl implements UserService {
                 .map(user -> createUser(user))
                 .collect(Collectors.toList());
         return created;
-    }
-
-////    Programmatic transaction
-//    public List<User> createUsersBatch(List<User> users) {
-//        return transactionTemplate.execute(new TransactionCallback<List<User>>() {
-//            // the code in this method executes in a transactional context
-//            public List<User> doInTransaction(TransactionStatus status) {
-//                List<User> created = users.stream()
-//                        .map(user -> {
-//                            try {
-//                                return createUser(user);
-//                            } catch (ConstraintViolationException ex) {
-//                                log.error(">>> Constraint violation inserting users: {} - {}", user, ex.getMessage());
-//                                status.setRollbackOnly();
-//                                return null;
-//                            }
-//                        }).collect(Collectors.toList());
-//                return created;
-//            }
-//        });
-//    }
-
-    // Managing transaction directly using PlatformTransactionManager
-//    public List<User> createUsersBatch(List<User> users) {
-//        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-//        // explicitly setting the transaction name is something that can only be done programmatically
-//        def.setName("createUsersBatchTransaction");
-//        def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
-//        def.setTimeout(5);
-//
-//        // Do in transaction
-//        TransactionStatus status = transactionManager.getTransaction(def);
-//        List<User> created = users.stream()
-//            .map(user -> {
-//                try {
-//                    User resultUser = createUser(user);
-//                    applicationEventPublisher.publishEvent(new UserCreationEvent(resultUser));
-//                    return resultUser;
-//                } catch (ConstraintViolationException ex) {
-//                    log.error(">>> Constraint violation inserting user: {} - {}", user, ex.getMessage());
-//                    transactionManager.rollback(status); // ROLLBACK
-//                    throw ex;
-//                }
-//            }).collect(Collectors.toList());
-//
-//        transactionManager.commit(status); // COMMIT
-//        return created;
-//    }
-
-    @TransactionalEventListener
-    public void handleUserCreatedTransactionCommit(UserCreationEvent creationEvent) {
-        log.info(">>> Transaction COMMIT for user: {}", creationEvent.getUser());
-    }
-
-    @TransactionalEventListener(phase = TransactionPhase.AFTER_ROLLBACK)
-    public void handleUserCreatedTransactionRollaback(UserCreationEvent creationEvent) {
-        log.info(">>> Transaction ROLLBACK for user: {}", creationEvent.getUser());
     }
 
 }

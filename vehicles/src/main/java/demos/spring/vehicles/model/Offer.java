@@ -25,19 +25,23 @@ public class Offer {
     @EqualsAndHashCode.Include
     private Long id;
 
-//    @NonNull
+    @NonNull
+    @NotNull
     private VehicleCategory category;
 
     @NonNull
+    @NotNull
     @ManyToOne
     private Model model;
 
     @NonNull
+    @NotNull
 //    @PastOrPresent
     @Min(1900)
     private Integer year = 2020;
 
-//    @NonNull
+    @NonNull
+    @NotNull
     @Positive
     private Integer mileage;
 
