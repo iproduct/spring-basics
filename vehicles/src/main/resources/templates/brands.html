@@ -75,12 +75,12 @@
                             <th>Picture</th>
                         </tr>
                         <tr th:each="model, modelStat: ${brand.models}">
-                            <th th:text="${modelStat.index + 1}">No</th>
-                            <th th:text="${model.name}">Name</th>
-                            <th th:text="${model.category}">Category</th>
-                            <th th:text="${model.startYear}">Start Year</th>
-                            <th th:text="${model.endYear}">End Year</th>
-                            <th><img th:src="${model.imageUrl}" class="img-thumbnail rounded"></th>
+                            <td th:text="${modelStat.index + 1}">No</td>
+                            <td th:text="${model.name}">Name</td>
+                            <td th:text="${model.category}">Category</td>
+                            <td th:text="${model.startYear}">Start Year</td>
+                            <td th:text="${model.endYear}">End Year</td>
+                            <td><img th:src="${model.imageUrl}" class="img-thumbnail rounded"></td>
                         </tr>
                     </table>
                 </div>

@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -39,15 +40,17 @@ public class OfferController {
 
     @GetMapping("/add")
     public String getOfferForm(Model model) {
-        model.addAttribute("offer", new Offer());
+        if(model.getAttribute("offer") == null) {
+            model.addAttribute("offer", new Offer());
+        }
         model.addAttribute("brands", brandService.getBrands());
         return "offer-add";
     }
 
     @PostMapping("/add")
-    public String createNewOffer(@ModelAttribute("offer") Offer offer, Errors errors) {
-        if(errors.hasErrors()) {
-            log.error("Error creating offer: {}", errors.getAllErrors());
+    public String createNewOffer(@Valid @ModelAttribute("offer") Offer offer, BindingResult result) {
+        if(result.hasErrors()) {
+            log.error("Error creating offer: {}", result.getAllErrors());
             return "offer-add";
         }
         try {
