@@ -81,6 +81,4 @@ public class OfferController {
 
         return "redirect:/offers";
     }
-
-
 }

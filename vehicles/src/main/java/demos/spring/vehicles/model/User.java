@@ -11,11 +11,9 @@ import org.hibernate.validator.constraints.Length;
 //import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -23,7 +21,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @JsonIgnoreProperties({"authorities", "accountNonExpired", "accountNonLocked", "credentialsNonExpired", "enabled"})
@@ -61,7 +58,7 @@ public class User  {
     @NonNull
     @NotNull
     @ElementCollection(fetch = FetchType.EAGER)
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 
     private boolean active = true;
 
@@ -78,6 +75,33 @@ public class User  {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date modified = new Date();
+
+    public User(@Length(min = 2, max = 60) String firstName,
+                @Length(min = 2, max = 60) String lastName,
+                @Length(min = 3, max = 60) @NotNull String username,
+                @Length(min = 4, max = 80) @NotNull String password,
+                @NotEmpty Set<Role> roles) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+        this.imageUrl = "/img/user-avatar.svg";
+    }
+
+    public User(@Length(min = 2, max = 60) String firstName,
+                @Length(min = 2, max = 60) String lastName,
+                @Length(min = 3, max = 60) @NotNull String username,
+                @Length(min = 4, max = 80) @NotNull String password,
+                @NotEmpty Set<Role> roles,
+                @Length(min = 8, max = 512) String imageUrl) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+        this.imageUrl = imageUrl;
+    }
 
 //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {

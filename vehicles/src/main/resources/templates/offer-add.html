@@ -1,59 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Auto Dealer Shop</title>
-    <link rel="stylesheet" href="/css/reset-css.css"/>
-    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/css/style.css"/>
-</head>
+<head th:replace="fragments/head::head('Auto Dealer Shop: Add New Offer')" />
 <body>
 <main class="main">
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
-        <a class="navbar-brand" href="#"><img th:src="@{/img/car.png}" class="logo"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto col-12 justify-content-between">
-                <li class="nav-item">
-                    <a class="nav-link active" href="/brands">All Brands</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/">Add Brand</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/">Add Model</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/offers/add">Add Offer</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/offers">All Offers</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <li>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <nav th:replace="fragments/menu::menu" />
 
     <div class="container">
         <h2 class="text-center text-white">Upload Offer</h2>
@@ -129,5 +79,6 @@
         </form>
     </div>
 </main>
+<footer th:replace="fragments/footer::footer" />
 </body>
 </html>

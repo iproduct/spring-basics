@@ -3,22 +3,22 @@ package demos.spring.vehicles.service.impl;
 
 import demos.spring.vehicles.dao.UserRepository;
 import demos.spring.vehicles.exception.InvalidEntityException;
-import demos.spring.vehicles.model.Offer;
 import demos.spring.vehicles.model.Role;
 import demos.spring.vehicles.model.User;
 import demos.spring.vehicles.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.event.TransactionPhase;
-import org.springframework.transaction.event.TransactionalEventListener;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+//import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Service
 @Slf4j
