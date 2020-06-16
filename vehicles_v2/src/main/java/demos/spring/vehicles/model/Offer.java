@@ -55,17 +55,17 @@ public class Offer {
     @Positive
     private Double price;
 
-    @NotNull(message = "Vechicle imageUrl is required.")
-    @Length(min = 8, max = 512)
+//    @NotNull(message = "Vechicle imageUrl is required.")
+//    @Length(min = 8, max = 512)
     private String imageUrl;
 
     @ManyToOne(optional = true)
     @ToString.Exclude
     private User seller;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Transient
-    private Long modelId;
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    @Transient
+//    private Long modelId;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Transient

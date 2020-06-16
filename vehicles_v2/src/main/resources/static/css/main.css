@@ -57,3 +57,11 @@ form.main-form {
 .logged-user {
      color: white;
 }
+
+.details-card-img-top-wrapper {
+     overflow: hidden;
+}
+
+.file-upload {
+     color: white;
+}

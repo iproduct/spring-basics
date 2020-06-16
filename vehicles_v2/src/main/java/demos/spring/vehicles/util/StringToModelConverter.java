@@ -17,9 +17,9 @@ public class StringToModelConverter implements Converter<String, Model> {
     }
 
     @Override
-    public Model convert(String from) {
-        if(from != null && from.length() > 0) {
-            Model model = brandService.getModelById(Long.parseLong(from));
+    public Model convert(String modelId) {
+        if(modelId != null && modelId.trim().length() > 0) {
+            Model model = brandService.getModelById(Long.parseLong(modelId.trim()));
             return model;
         } else {
             return null;
