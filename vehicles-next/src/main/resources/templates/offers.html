@@ -22,7 +22,7 @@
                     </li>
                 </ul>
                 <div class="card-body">
-                    <a class="card-link" href="/cars/id">Details</a>
+                    <a class="card-link" th:href="@{/offers/details/{offerId}(offerId=${offer.id})}">Details</a>
                 </div>
             </div>
         </div>
