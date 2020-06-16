@@ -86,6 +86,11 @@ public class OfferController {
                                  HttpServletRequest request, HttpSession session,
                                  @RequestParam(name = "file", required = false) MultipartFile file) {
 //        request.getParameterMap().entrySet().stream().map(e -> Arrays.asList(e.getValue())).forEach(System.out::println);
+        Enumeration<String> attrs = session.getAttributeNames();
+        while( attrs.hasMoreElements()) {
+            System.out.println(attrs.nextElement());
+        }
+        System.out.println(session.getAttributeNames().asIterator());
         if (binding.hasErrors()) {
             List<String> errorMessages = binding.getAllErrors().stream().map(err -> {
                 ConstraintViolation cv = err.unwrap(ConstraintViolation.class);
