@@ -1,9 +1,6 @@
 package demos.spring.vehicles.init;
 
-import demos.spring.vehicles.model.Brand;
-import demos.spring.vehicles.model.Model;
-import demos.spring.vehicles.model.Role;
-import demos.spring.vehicles.model.User;
+import demos.spring.vehicles.model.*;
 import demos.spring.vehicles.service.BrandService;
 import demos.spring.vehicles.service.OfferService;
 import demos.spring.vehicles.service.UserService;
@@ -12,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static demos.spring.vehicles.model.Role.ADMIN;
 import static demos.spring.vehicles.model.Role.SELLER;
@@ -125,6 +120,11 @@ public class DataInitializer implements CommandLineRunner {
             new User("Ivan", "Pertov", "ivan", "ivan", Set.of(SELLER)),
             new User("Dimitar", "Georgiev", "dimitar", "dimitar", Set.of(Role.BUYER))
     );
+    private static final List<Offer> SAMPLE_OFFERS = List.of(
+            new Offer(1L, CAR, new ArrayList<Model>(SAMPLE_BRANDS.get("BMW")).get(5), 2016, 30000, EngineType.DIESEL,
+                    TransmissionType.AUTOMATIC, "all extras", 75000D, "/uploads/2018_BMW_630i_GT_M_Sport_Automatic_2.0_Front.jpg",
+                    SAMPLE_USERS.get(1), 1L, new Date(), new Date()  )
+    );
     @Override
     public void run(String... args) throws Exception {
         if(userService.getUsersCount() == 0) {
@@ -138,6 +138,13 @@ public class DataInitializer implements CommandLineRunner {
                 brandService.createBrand(newBrand);
             });
             log.info("Created Brands: {}", brandService.getBrands());
+        }
+
+        if(offerService.getOffersCount() == 0) {
+            SAMPLE_OFFERS.forEach(offer -> {
+                offerService.createOffer(offer);
+            });
+            log.info("Created Brands: {}", offerService.getOffers());
         }
 
     }
